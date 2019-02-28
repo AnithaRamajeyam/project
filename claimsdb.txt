@@ -1,0 +1,67 @@
+
+
+create table authentication(
+     uname varchar(20) primary key,
+     pwd varchar (20) not null,
+     role varchar(20) not null);
+
+
+
+create table adjuster(
+     id int(10) primary key,
+     claim_type varchar(50) not null,
+     first_name varchar(50) not null,
+     last_name varchar(50) not null,
+     exp int(11) not null);
+
+
+create table policy(
+     id int(11) primary key,
+     start_date date not null,
+     coverage_amt double(8,2) not null,
+     policy_status varchar(20) not null,
+     policy_term int(11) not null);
+
+
+ create table customer (
+	id int(11)primary key,
+	first_name varchar(20)not null,
+	last_name varchar(20)not null,
+	address varchar(100) not null,
+	email varchar(20),
+	phone_no varchar(20)not null);
+
+ create table claims(
+     	id int(11) primary key, 
+	customer_id int(11) references customer(id), 
+	adjuster_id int(10) references adjuster(id),
+	claim_type varchar(10) not null, 
+	status varchar(20) not null,
+	claim_set_date date,
+	claim_set_amt double(8,2), 
+	sub_claim_amt double(8,2),
+	salvage_rec_amt double(8,2),
+	policy_id int(11) not null references policy(id)
+	claimsinfo_id int(11) references claimsinfo(id)
+	autoclaimsinfo_id int(11) references autoclaimsinfo(id));
+
+create table claimsinfo(
+	id int(11) primary key,
+	cause varchar(45) not null,
+	policev varchar(45) not null,
+	firedpt varcahar(45) not null,
+	steps varchar(45) not null,
+	details varchar(45) not null);
+
+create table autoclaimsinfo(
+	id int(11) primary key,
+	dlicense varchar(15) not null unique,
+	vlicense varchar(15) not null unique,
+	amodel varchar(20) not null,
+	year int(11) not null,
+	accident_date varchar(10) not null,
+	accident_place varchar(45) not NULL,
+	details varchar(45) not NULL,
+	policev varchar(5) NOT NULL);
+
+
